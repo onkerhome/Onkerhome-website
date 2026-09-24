@@ -4,32 +4,43 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import ListingsIndex from "@/components/ListingsIndex";
-import { getDict } from "@/lib/i18n";
+import { catalogCopy, catalogFilter, catalogPath } from "@/lib/catalog-seo";
 import { getListings } from "@/lib/repo";
 
-export const metadata: Metadata = {
-  title: "Properties",
-  description:
-    "Exceptional residences for sale and rent in Santo Domingo, Cap Cana, Casa de Campo, Las Terrenas, Cabarete and the best areas of the Dominican Republic.",
-  alternates: {
-    canonical: "/en/propiedades",
-    languages: { es: "/propiedades", en: "/en/propiedades" },
-  },
-};
+export async function generateMetadata(
+  props: PageProps<"/en/propiedades">,
+): Promise<Metadata> {
+  const f = catalogFilter((await props.searchParams).f);
+  const c = catalogCopy("en", f);
+  return {
+    title: c.title,
+    description: c.description,
+    alternates: {
+      canonical: catalogPath("en", f),
+      languages: { es: catalogPath("es", f), en: catalogPath("en", f) },
+    },
+  };
+}
 
-export default async function PropertiesPageEn() {
+export default async function PropertiesPageEn(
+  props: PageProps<"/en/propiedades">,
+) {
+  const f = catalogFilter((await props.searchParams).f);
+  const c = catalogCopy("en", f);
   const listings = await getListings("en");
-  const t = getDict("en");
   return (
     <>
-      <Header solid lang="en" altHref="/propiedades" />
+      <Header solid lang="en" altHref={catalogPath("es", f)} />
       <main id="top" className="page">
         <section className="page-head">
           <div className="wrap">
-            <span className="eyebrow">{t.navProperties}</span>
-            <h2 style={{ marginTop: 16 }}>{t.propsPageTitle}</h2>
+            <span className="eyebrow">{c.eyebrow}</span>
+            <h1 style={{ marginTop: 16 }}>{c.h1}</h1>
             <p className="sub" style={{ marginTop: 16 }}>
-              {t.propsPageSub}
+              {c.sub}
+            </p>
+            <p className="sub" style={{ marginTop: 20, maxWidth: 760 }}>
+              {c.intro}
             </p>
           </div>
         </section>

@@ -4,31 +4,43 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import ListingsIndex from "@/components/ListingsIndex";
+import { catalogCopy, catalogFilter, catalogPath } from "@/lib/catalog-seo";
 import { getListings } from "@/lib/repo";
 
-export const metadata: Metadata = {
-  title: "Propiedades",
-  description:
-    "Residencias de excepción en venta y alquiler en Santo Domingo, Cap Cana, Casa de Campo, Las Terrenas y las mejores zonas de República Dominicana.",
-  alternates: {
-    canonical: "/propiedades",
-    languages: { es: "/propiedades", en: "/en/propiedades" },
-  },
-};
+export async function generateMetadata(
+  props: PageProps<"/propiedades">,
+): Promise<Metadata> {
+  const f = catalogFilter((await props.searchParams).f);
+  const c = catalogCopy("es", f);
+  return {
+    title: c.title,
+    description: c.description,
+    alternates: {
+      canonical: catalogPath("es", f),
+      languages: { es: catalogPath("es", f), en: catalogPath("en", f) },
+    },
+  };
+}
 
-export default async function PropiedadesPage() {
+export default async function PropiedadesPage(
+  props: PageProps<"/propiedades">,
+) {
+  const f = catalogFilter((await props.searchParams).f);
+  const c = catalogCopy("es", f);
   const listings = await getListings();
   return (
     <>
-      <Header solid />
+      <Header solid altHref={catalogPath("en", f)} />
       <main id="top" className="page">
         <section className="page-head">
           <div className="wrap">
-            <span className="eyebrow">Propiedades</span>
-            <h2 style={{ marginTop: 16 }}>Residencias de excepción</h2>
+            <span className="eyebrow">{c.eyebrow}</span>
+            <h1 style={{ marginTop: 16 }}>{c.h1}</h1>
             <p className="sub" style={{ marginTop: 16 }}>
-              Compra, alquila e invierte en las mejores zonas de Santo Domingo y
-              el Caribe dominicano.
+              {c.sub}
+            </p>
+            <p className="sub" style={{ marginTop: 20, maxWidth: 760 }}>
+              {c.intro}
             </p>
           </div>
         </section>

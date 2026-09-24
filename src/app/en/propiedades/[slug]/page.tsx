@@ -12,6 +12,7 @@ import { site, waLink } from "@/data/site";
 import { listingCover, listingPhotos } from "@/data/listings";
 import { getDict, pricePart, statusLabel } from "@/lib/i18n";
 import { getListingBySlug, getListings } from "@/lib/repo";
+import { listingTitle } from "@/lib/seo";
 
 export async function generateStaticParams() {
   return (await getListings()).map((l) => ({ slug: l.slug }));
@@ -24,7 +25,7 @@ export async function generateMetadata(
   const l = await getListingBySlug(slug, "en");
   if (!l) return { title: "Property" };
   return {
-    title: `${l.name} · ${l.location}`,
+    title: listingTitle(l.name),
     description: `${l.name} — ${l.specs} — ${l.location}. ${statusLabel(l.status, "en")} by Onker Home.`,
     alternates: {
       canonical: `/en/propiedades/${l.slug}`,

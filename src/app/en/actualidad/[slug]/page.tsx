@@ -8,6 +8,7 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { site, waLink } from "@/data/site";
 import { getDict } from "@/lib/i18n";
 import { getArticleBySlug, getArticles } from "@/lib/repo";
+import { articleTitle } from "@/lib/seo";
 
 export async function generateStaticParams() {
   return (await getArticles("en")).map((a) => ({ slug: a.slug }));
@@ -21,7 +22,7 @@ export async function generateMetadata(
   if (!a) return { title: "News" };
   const description = a.lede.length > 155 ? `${a.lede.slice(0, 152)}…` : a.lede;
   return {
-    title: a.title,
+    title: articleTitle(a.title),
     description,
     alternates: {
       canonical: `/en/actualidad/${a.slug}`,

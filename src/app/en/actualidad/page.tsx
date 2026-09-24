@@ -28,7 +28,7 @@ export default async function NewsPageEn() {
         <section className="page-head">
           <div className="wrap" style={{ textAlign: "center" }}>
             <span className="eyebrow">{t.artEyebrow}</span>
-            <h2 style={{ marginTop: 16 }}>{t.artPageTitle}</h2>
+            <h1 style={{ marginTop: 16 }}>{t.artPageTitle}</h1>
             <p className="sub" style={{ margin: "16px auto 0" }}>
               {t.artPageSub}
             </p>

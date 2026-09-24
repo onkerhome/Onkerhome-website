@@ -11,6 +11,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: site.url, changeFrequency: "weekly", priority: 1 },
     { url: `${site.url}/propiedades`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${site.url}/propiedades?f=venta`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${site.url}/propiedades?f=alquiler`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${site.url}/propiedades?f=obra`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${site.url}/nosotros`, changeFrequency: "monthly", priority: 0.7 },
     {
       url: `${site.url}/testimonios`,
@@ -40,6 +43,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    { url: `${site.url}/en/propiedades?f=venta`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${site.url}/en/propiedades?f=alquiler`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${site.url}/en/propiedades?f=obra`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${site.url}/en/nosotros`, changeFrequency: "monthly", priority: 0.6 },
     {
       url: `${site.url}/en/testimonios`,

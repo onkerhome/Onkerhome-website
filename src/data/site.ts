@@ -25,7 +25,8 @@ export const site = {
   hours: "Lun–Vie 9:00–18:00 · Sáb 9:00–13:00",
   social: {
     instagram: "https://www.instagram.com/onker_home/",
-    facebook: "https://www.facebook.com/share/14eqJ9w7bL6/",
+    // Canonical page URL (the /share/ link returns HTTP 400 to crawlers).
+    facebook: "https://www.facebook.com/Onkerhome/",
     google: "https://share.google/tELwf7VW4VWDTUSMu",
   },
   stats: [

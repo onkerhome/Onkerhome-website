@@ -26,9 +26,9 @@ export default async function ActualidadPage() {
         <section className="page-head">
           <div className="wrap" style={{ textAlign: "center" }}>
             <span className="eyebrow">Actualidad</span>
-            <h2 style={{ marginTop: 16 }}>
+            <h1 style={{ marginTop: 16 }}>
               Información inmobiliaria y financiera de República Dominicana
-            </h2>
+            </h1>
             <p className="sub" style={{ margin: "16px auto 0" }}>
               Análisis, guías y noticias para comprar, vender e invertir con
               mejor información.
